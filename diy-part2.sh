@@ -15,11 +15,12 @@ delete_bootstrap=false
 # 默认主题 结合主题文件夹名字
 default_theme='argon'
 
-#修改默认主题
-sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
-
 if [ $delete_bootstrap ]; then
-  echo "去除默认bootstrap主题"
+
+  #修改默认主题
+  sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
+
+  #去除默认bootstrap主题
   sed -i '/\+luci-theme-bootstrap/d' feeds/luci/collections/luci/Makefile
   sed -i '/\+luci-theme-bootstrap/d' package/feeds/luci/luci/Makefile
   sed -i '/CONFIG_PACKAGE_luci-theme-bootstrap=y/d' .config

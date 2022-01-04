@@ -10,8 +10,6 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-# Lan Ip地址
-lan_ip='192.168.31.1'
 # 是否删除默认主题 true 、false
 delete_bootstrap=false
 # 默认主题 结合主题文件夹名字
@@ -29,7 +27,7 @@ if [ $delete_bootstrap ]; then
 fi
 
 # Modify default IP
-sed -i 's/192.168.1.1/$lan_ip/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.31.1/g' package/base-files/files/bin/config_generate
 
 #修正连接数（by ベ七秒鱼ベ）
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf

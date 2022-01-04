@@ -14,9 +14,6 @@ device_name='红米AX6'
 echo "修改机器名称"
 sed -i "s/OpenWrt/$device_name/g" package/base-files/files/bin/config_generate
 
-wifi_name='SHERO'
-echo "修改wifi名称"
-sed -i "s/OpenWrt/$wifi_name/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # Lan Ip地址
 lan_ip='192.168.31.1'

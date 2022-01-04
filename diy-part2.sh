@@ -27,7 +27,7 @@ if [ $delete_bootstrap ]; then
   sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 fi
 
-#删除无用软件包ppt、zerotie、kms
+#删除无用软件包pptp、zerotier、kms
 sed -i '/CONFIG_PACKAGE_luci-app-pptp-server=y/d' .config
 sed -i '/CONFIG_PACKAGE_luci-app-zerotier=y/d' .config
 sed -i '/CONFIG_PACKAGE_luci-app-vlmcsd=y/d' .config

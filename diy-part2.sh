@@ -10,11 +10,6 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-device_name='红米AX6'
-echo "修改机器名称"
-sed -i "s/OpenWrt/$device_name/g" package/base-files/files/bin/config_generate
-
-
 # Lan Ip地址
 lan_ip='192.168.31.1'
 # 是否删除默认主题 true 、false

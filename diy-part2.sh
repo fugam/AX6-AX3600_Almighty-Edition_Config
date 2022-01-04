@@ -10,8 +10,34 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
+device_name='红米AX6'
+echo "修改机器名称"
+sed -i "s/OpenWrt/$device_name/g" ./package/base-files/files/bin/config_generate
+
+wifi_name='SHERO'
+echo "修改wifi名称"
+sed -i "s/OpenWrt/$wifi_name/g" ./package/kernel/mac80211/files/lib/wifi/mac80211.sh
+
+# Lan Ip地址
+lan_ip='192.168.31.1'
+# 是否删除默认主题 true 、false
+delete_bootstrap=false
+# 默认主题 结合主题文件夹名字
+default_theme='argon_mc1'
+
+#修改默认主题
+sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
+
+if [ $delete_bootstrap ]; then
+  echo "去除默认bootstrap主题"
+  sed -i '/\+luci-theme-bootstrap/d' feeds/luci/collections/luci/Makefile
+  sed -i '/\+luci-theme-bootstrap/d' package/feeds/luci/luci/Makefile
+  sed -i '/CONFIG_PACKAGE_luci-theme-bootstrap=y/d' .config
+  sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
+fi
+
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.31.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/$lan_ip/g' package/base-files/files/bin/config_generate
 
 # 修改连接数
 #sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535/g' package/kernel/linux/files/sysctl-nf-conntrack.conf

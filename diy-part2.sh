@@ -10,20 +10,20 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-#device_name='红米AX6'
-#echo "修改机器名称"
-#sed -i "s/OpenWrt/$device_name/g" ./package/base-files/files/bin/config_generate
+device_name='红米AX6'
+echo "修改机器名称"
+sed -i "s/OpenWrt/$device_name/g" package/base-files/files/bin/config_generate
 
-#wifi_name='SHERO'
-#echo "修改wifi名称"
-#sed -i "s/OpenWrt/$wifi_name/g" ./package/kernel/mac80211/files/lib/wifi/mac80211.sh
+wifi_name='SHERO'
+echo "修改wifi名称"
+sed -i "s/OpenWrt/$wifi_name/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # Lan Ip地址
 lan_ip='192.168.31.1'
 # 是否删除默认主题 true 、false
 delete_bootstrap=false
 # 默认主题 结合主题文件夹名字
-default_theme='argon_mc1'
+default_theme='argon'
 
 #修改默认主题
 sed -i "s/bootstrap/$default_theme/g" feeds/luci/modules/luci-base/root/etc/config/luci
@@ -39,8 +39,6 @@ fi
 # Modify default IP
 sed -i 's/192.168.1.1/$lan_ip/g' package/base-files/files/bin/config_generate
 
-# 修改连接数
-#sed -i 's/net.netfilter.nf_conntrack_max=.*/net.netfilter.nf_conntrack_max=65535/g' package/kernel/linux/files/sysctl-nf-conntrack.conf
 #修正连接数（by ベ七秒鱼ベ）
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
 
@@ -59,8 +57,7 @@ git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/zzsj0928/luci-app-pushbot.git package/luci-app-pushbot
 #git clone https://github.com/riverscn/openwrt-iptvhelper.git package/openwrt-iptvhelper
 #git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/luci-app-jd-dailybonus
-#添加smartdns
 git clone https://github.com/kiddin9/luci-app-dnsfilter.git package/luci-app-dnsfilter
-
+#添加smartdns
 git clone https://github.com/pymumu/openwrt-smartdns package/smartdns
 git clone -b lede https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns

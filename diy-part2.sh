@@ -12,8 +12,6 @@
 
 # 是否删除默认主题 true 、false
 delete_bootstrap=false
-# 默认主题 结合主题文件夹名字
-default_theme='argon'
 
 if [ $delete_bootstrap ]; then
 

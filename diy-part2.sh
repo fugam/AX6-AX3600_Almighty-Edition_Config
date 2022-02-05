@@ -10,23 +10,6 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-# 是否删除默认主题 true 、false
-delete_bootstrap=false
-
-if [ $delete_bootstrap ]; then
-
-  #修改默认主题
-  
-  sed -i "s/Bootstrap/Argon/g" feeds/luci/modules/luci-base/root/etc/config/luci
-  sed -i "s/bootstrap/argon/g" feeds/luci/modules/luci-base/root/etc/config/luci
-
-  #去除默认bootstrap主题
-  sed -i '/\+luci-theme-bootstrap/d' feeds/luci/collections/luci/Makefile
-  sed -i '/\+luci-theme-bootstrap/d' package/feeds/luci/luci/Makefile
-  sed -i '/CONFIG_PACKAGE_luci-theme-bootstrap=y/d' .config
-  sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
-fi
-
 # 修改默认Lan IP
 sed -i 's/192.168.1.1/192.168.31.1/g' package/base-files/files/bin/config_generate
 
